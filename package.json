@@ -2,26 +2,32 @@
   "name": "electron-download-tutorial",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
+  "main": "public/electron.js",
+  "productName": "My App",
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "electron": "^13.1.1",
+    "electron-dl": "^3.2.1",
+    "electron-log": "^4.3.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export BROWSER=none && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "dev": "concurrently \"npm run-script start\" \"wait-on http://localhost:3000 && electron .\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository":{
+    "type": "git",
+    "url": "git@github.com:Chirag47/electron-download-tutorial.git"
   },
   "browserslist": {
     "production": [
