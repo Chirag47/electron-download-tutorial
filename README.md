@@ -54,7 +54,7 @@ So to break it into steps, we'd have the following-
     }
     ```
 
-2. Add a event listener in the Main Process to listen the channel used by ipcRenderer to send download message.
+2. Add a event listener in the Main Process to listen to the channel used by ipcRenderer to send download message.
 
     ```javascript
     ipcMain.on("download", (event, {payload}) => {
@@ -132,7 +132,7 @@ Now let's modify the above 4 steps to add customization
     
     ipcMain.on("download", async(event, {payload}) => {
         let properties = payload.properties ? {...payload.properties} : {};
-        const defaultPath = app.getPath("downloads");
+        const defaultPath = app.getPath(properties.directory ? properties.directory : "documents");
         const defaultFileName = properties.filename ? 
             properties.filename : 
             payload.url.split('?')[0].split('/').pop();
@@ -172,7 +172,7 @@ Now let's modify the above 4 steps to add customization
     ipcMain.on("download", async(event, {payload}) => {
         let properties = payload.properties ? {...payload.properties} : {};
 
-        const defaultPath = app.getPath("downloads");
+        const defaultPath = app.getPath(properties.directory ? properties.directory : "documents");
         const defaultFileName = properties.filename ? 
             properties.filename : 
             payload.url.split('?')[0].split('/').pop();
@@ -218,6 +218,6 @@ Now let's modify the above 4 steps to add customization
     With this you have the progress of the file when it is downloading and downloadedItem when the file has downloaded. Now it's up to you how you want to present it.
 
 ## Summary
-You have various methods to download your file from urls and it's really up to you how much control do you want to have over every aspect of your app. In this article I have ust covered the bare minimum of these libraries and electron's factory classes. I trust you'll go through the official docs of these libraries and explore what other awesome features they have provided.
+You have various methods to download your file from urls and it's really up to you how much control do you want to have over every aspect of your app. In this article I have just covered the bare minimum of these libraries and electron's factory classes. I trust you'll go through the official docs of these libraries and explore what other awesome features they have provided.
 
-***There is a possibilty that you might be facing difficulty with accessing ipcRenderer inside of your UI Components with higher versions of Electron or some UI frameworks like React/Angular, keep an eye out for my upcoming article in which I'll discuss various techniques you can use to access ipcRenderer and other node modules inside your renderer process.***
+**There is a possibilty that you might be facing difficulty with accessing ipcRenderer inside of your UI Components with higher versions of Electron or some UI frameworks like React/Angular. Keep an eye out for my upcoming article in which I'll discuss various techniques you can use to access ipcRenderer and other node modules inside your renderer process.**

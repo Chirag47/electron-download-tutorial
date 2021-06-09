@@ -31,7 +31,7 @@ function createWindow () {
 ipcMain.on("download", async(event, {payload}) => {
   let properties = payload.properties ? {...payload.properties} : {};
 
-  const defaultPath = app.getPath("downloads");
+  const defaultPath = app.getPath(properties.directory ? properties.directory : "documents");
   const defaultFileName = properties.filename ? properties.filename : payload.url.split('?')[0].split('/').pop();
 
   let customURL = dialog.showSaveDialogSync({
